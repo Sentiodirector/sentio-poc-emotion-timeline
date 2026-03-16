@@ -1,0 +1,58 @@
+{
+  "_readme": "Your emotion_timeline_output.json must match this structure exactly. It is added as person_profiles[pid]['emotion_timeline'] in the Sentio Mind multi_day_report.json. Do not add, remove, or rename any top-level key.",
+
+  "source": "p6_emotion_timeline",
+  "video": "video_sample_1.mov",
+  "duration_sec": 0.0,
+  "fps_analyzed": 8,
+  "dominant_emotion": "neutral",
+
+  "emotion_time_pct": {
+    "angry": 0.0,
+    "disgust": 0.0,
+    "fear": 0.0,
+    "happy": 0.0,
+    "neutral": 0.0,
+    "sad": 0.0,
+    "surprise": 0.0
+  },
+
+  "suppression_score": 0,
+  "emotional_range_score": 0,
+
+  "micro_expressions": [
+    {
+      "id": 1,
+      "timestamp_sec": 0.0,
+      "duration_sec": 0.0,
+      "emotion": "fear",
+      "peak_probability": 0.0,
+      "followed_by": "neutral",
+      "is_suppressed": true
+    }
+  ],
+
+  "transitions": [
+    {
+      "from_emotion": "neutral",
+      "to_emotion": "happy",
+      "timestamp_sec": 0.0,
+      "transition_duration_sec": 0.0
+    }
+  ],
+
+  "frame_series": [
+    {
+      "t": 0.0,
+      "emotions": {
+        "angry": 0,
+        "disgust": 0,
+        "fear": 0,
+        "happy": 0,
+        "neutral": 100,
+        "sad": 0,
+        "surprise": 0
+      }
+    }
+  ]
+}
