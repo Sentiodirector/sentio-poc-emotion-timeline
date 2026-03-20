@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Emotion Timeline</title>
+
+<script src="chart.min.js"></script>
+
+<style>
+body {
+  font-family: Arial;
+  margin: 20px;
+}
+canvas {
+  max-width: 100%;
+}
+</style>
+
+</head>
+
+<body>
+
+<h2>Emotion Timeline (Stacked River Chart)</h2>
+<canvas id="chart"></canvas>
+
+<script>
+fetch('emotion_timeline_output.json')
+.then(res => res.json())
+.then(data => {
+
+    console.log("DATA LOADED:", data); // debug
+
+    const timeline = data.timeline;
+    const micros = data.micro_expressions;
+
+    // ✅ IMPORTANT: use numbers, not strings
+    const labels = timeline.map(t => t.time);
+
+    const emotions = ["angry","disgust","fear","happy","sad","surprise","neutral"];
+
+    const datasets = emotions.map(e => ({
+        label: e,
+        data: timeline.map(t => t.probabilities[e]),
+        fill: true,
+        tension: 0.3,
+        pointRadius: 0
+    }));
+
+    const ctx = document.getElementById('chart').getContext('2d');
+
+    new Chart(ctx, {
+        type: 'line',
+        data: { labels, datasets },
+        options: {
+            responsive: true,
+            interaction: {
+                mode: 'index',
+                intersect: false
+            },
+            scales: {
+                x: {
+                    stacked: true,
+                    title: {
+                        display: true,
+                        text: 'Time (seconds)'
+                    },
+                    ticks: {
+                        maxTicksLimit: 10
+                    }
+                },
+                y: {
+                    stacked: true,
+                    title: {
+                        display: true,
+                        text: 'Emotion Probability'
+                    }
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Emotion Distribution Over Time'
+                },
+                tooltip: {
+                    enabled: true
+                }
+            }
+        },
+        plugins: [{
+    id: 'microLines',
+    afterDraw(chart) {
+        const {ctx, chartArea, scales} = chart;
+        if (!chartArea) return;
+
+        const {top, bottom} = chartArea;
+        const xScale = scales.x;
+
+        micros.forEach(m => {
+            const xPos = xScale.getPixelForValue(m.start);
+
+            ctx.save();
+
+            ctx.setLineDash([5,5]);
+            ctx.beginPath();
+            ctx.moveTo(xPos, top);
+            ctx.lineTo(xPos, bottom);
+            ctx.strokeStyle = "red";
+            ctx.stroke();
+
+            ctx.restore();
+        });
+    },
+    afterEvent(chart, args) {
+        const {event} = args;
+        const {ctx, chartArea, scales} = chart;
+
+        if (!chartArea) return;
+
+        const xScale = scales.x;
+
+        micros.forEach(m => {
+            const xPos = xScale.getPixelForValue(m.start);
+
+            if (Math.abs(event.x - xPos) < 5) {
+                chart.canvas.title = `Micro: ${m.emotion} (${m.start}s)`;
+            }
+        });
+    }
+}]
+    });
+
+})
+.catch(err => {
+    console.error("ERROR LOADING JSON:", err);
+});
+</script>
+
+</body>
+</html>
