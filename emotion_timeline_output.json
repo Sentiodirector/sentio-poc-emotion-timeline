@@ -1,0 +1,1056 @@
+{
+  "person_profiles": {
+    "Anamika": {
+      "emotion_timeline": {
+        "source": "p6_emotion_timeline",
+        "video": "video_sample_1.mov",
+        "duration_sec": 78.4,
+        "fps_analyzed": 8,
+        "dominant_emotion": "fear",
+        "emotion_time_pct": {
+          "angry": 24.296296,
+          "disgust": 0.296296,
+          "fear": 28.111111,
+          "happy": 8.185185,
+          "neutral": 12.703704,
+          "sad": 10.259259,
+          "surprise": 16.148148
+        },
+        "suppression_score": 8,
+        "emotional_range_score": 100,
+        "micro_expressions": [
+          {
+            "id": 1,
+            "timestamp_sec": 75.867,
+            "duration_sec": 0.266,
+            "emotion": "fear",
+            "peak_probability": 87.0,
+            "followed_by": "surprise",
+            "is_suppressed": false
+          },
+          {
+            "id": 2,
+            "timestamp_sec": 77.733,
+            "duration_sec": 0.267,
+            "emotion": "happy",
+            "peak_probability": 97.0,
+            "followed_by": "neutral",
+            "is_suppressed": true
+          }
+        ],
+        "transitions": [],
+        "frame_series": [
+          {
+            "t": 14.8,
+            "emotions": {
+              "angry": 0,
+              "disgust": 0,
+              "fear": 0,
+              "happy": 0,
+              "neutral": 11,
+              "sad": 89,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 72.267,
+            "emotions": {
+              "angry": 0,
+              "disgust": 0,
+              "fear": 93,
+              "happy": 0,
+              "neutral": 5,
+              "sad": 2,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 73.467,
+            "emotions": {
+              "angry": 73,
+              "disgust": 0,
+              "fear": 8,
+              "happy": 13,
+              "neutral": 5,
+              "sad": 1,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 73.6,
+            "emotions": {
+              "angry": 69,
+              "disgust": 1,
+              "fear": 24,
+              "happy": 0,
+              "neutral": 3,
+              "sad": 3,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 73.733,
+            "emotions": {
+              "angry": 84,
+              "disgust": 2,
+              "fear": 14,
+              "happy": 0,
+              "neutral": 0,
+              "sad": 0,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 74.0,
+            "emotions": {
+              "angry": 91,
+              "disgust": 0,
+              "fear": 9,
+              "happy": 0,
+              "neutral": 0,
+              "sad": 0,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 74.133,
+            "emotions": {
+              "angry": 95,
+              "disgust": 0,
+              "fear": 4,
+              "happy": 0,
+              "neutral": 0,
+              "sad": 1,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 74.533,
+            "emotions": {
+              "angry": 15,
+              "disgust": 1,
+              "fear": 69,
+              "happy": 7,
+              "neutral": 2,
+              "sad": 6,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 74.8,
+            "emotions": {
+              "angry": 17,
+              "disgust": 4,
+              "fear": 63,
+              "happy": 16,
+              "neutral": 0,
+              "sad": 0,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 74.933,
+            "emotions": {
+              "angry": 27,
+              "disgust": 0,
+              "fear": 7,
+              "happy": 0,
+              "neutral": 4,
+              "sad": 62,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 75.2,
+            "emotions": {
+              "angry": 69,
+              "disgust": 0,
+              "fear": 14,
+              "happy": 0,
+              "neutral": 0,
+              "sad": 17,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 75.467,
+            "emotions": {
+              "angry": 56,
+              "disgust": 0,
+              "fear": 32,
+              "happy": 4,
+              "neutral": 8,
+              "sad": 0,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 75.6,
+            "emotions": {
+              "angry": 0,
+              "disgust": 0,
+              "fear": 95,
+              "happy": 3,
+              "neutral": 0,
+              "sad": 0,
+              "surprise": 2
+            }
+          },
+          {
+            "t": 75.733,
+            "emotions": {
+              "angry": 6,
+              "disgust": 0,
+              "fear": 18,
+              "happy": 2,
+              "neutral": 73,
+              "sad": 1,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 75.867,
+            "emotions": {
+              "angry": 20,
+              "disgust": 0,
+              "fear": 61,
+              "happy": 5,
+              "neutral": 12,
+              "sad": 1,
+              "surprise": 1
+            }
+          },
+          {
+            "t": 76.0,
+            "emotions": {
+              "angry": 8,
+              "disgust": 0,
+              "fear": 87,
+              "happy": 2,
+              "neutral": 0,
+              "sad": 0,
+              "surprise": 3
+            }
+          },
+          {
+            "t": 76.133,
+            "emotions": {
+              "angry": 15,
+              "disgust": 0,
+              "fear": 70,
+              "happy": 2,
+              "neutral": 0,
+              "sad": 0,
+              "surprise": 13
+            }
+          },
+          {
+            "t": 76.267,
+            "emotions": {
+              "angry": 0,
+              "disgust": 0,
+              "fear": 2,
+              "happy": 0,
+              "neutral": 0,
+              "sad": 0,
+              "surprise": 98
+            }
+          },
+          {
+            "t": 76.4,
+            "emotions": {
+              "angry": 0,
+              "disgust": 0,
+              "fear": 1,
+              "happy": 0,
+              "neutral": 0,
+              "sad": 0,
+              "surprise": 99
+            }
+          },
+          {
+            "t": 76.533,
+            "emotions": {
+              "angry": 0,
+              "disgust": 0,
+              "fear": 3,
+              "happy": 3,
+              "neutral": 0,
+              "sad": 0,
+              "surprise": 94
+            }
+          },
+          {
+            "t": 77.067,
+            "emotions": {
+              "angry": 0,
+              "disgust": 0,
+              "fear": 1,
+              "happy": 0,
+              "neutral": 30,
+              "sad": 69,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 77.2,
+            "emotions": {
+              "angry": 6,
+              "disgust": 0,
+              "fear": 16,
+              "happy": 1,
+              "neutral": 1,
+              "sad": 1,
+              "surprise": 75
+            }
+          },
+          {
+            "t": 77.333,
+            "emotions": {
+              "angry": 2,
+              "disgust": 0,
+              "fear": 50,
+              "happy": 0,
+              "neutral": 1,
+              "sad": 2,
+              "surprise": 45
+            }
+          },
+          {
+            "t": 77.467,
+            "emotions": {
+              "angry": 1,
+              "disgust": 0,
+              "fear": 5,
+              "happy": 0,
+              "neutral": 86,
+              "sad": 7,
+              "surprise": 1
+            }
+          },
+          {
+            "t": 77.733,
+            "emotions": {
+              "angry": 1,
+              "disgust": 0,
+              "fear": 10,
+              "happy": 66,
+              "neutral": 9,
+              "sad": 9,
+              "surprise": 5
+            }
+          },
+          {
+            "t": 78.0,
+            "emotions": {
+              "angry": 1,
+              "disgust": 0,
+              "fear": 1,
+              "happy": 97,
+              "neutral": 0,
+              "sad": 1,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 78.4,
+            "emotions": {
+              "angry": 0,
+              "disgust": 0,
+              "fear": 2,
+              "happy": 0,
+              "neutral": 93,
+              "sad": 5,
+              "surprise": 0
+            }
+          }
+        ]
+      }
+    },
+    "Jahanvi": {
+      "emotion_timeline": {
+        "source": "p6_emotion_timeline",
+        "video": "video_sample_1.mov",
+        "duration_sec": 89.733,
+        "fps_analyzed": 8,
+        "dominant_emotion": "happy",
+        "emotion_time_pct": {
+          "angry": 13.076923,
+          "disgust": 0.076923,
+          "fear": 21.230769,
+          "happy": 24.846154,
+          "neutral": 11.076923,
+          "sad": 22.615385,
+          "surprise": 7.076923
+        },
+        "suppression_score": 0,
+        "emotional_range_score": 100,
+        "micro_expressions": [],
+        "transitions": [],
+        "frame_series": [
+          {
+            "t": 22.4,
+            "emotions": {
+              "angry": 0,
+              "disgust": 0,
+              "fear": 54,
+              "happy": 0,
+              "neutral": 0,
+              "sad": 46,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 22.933,
+            "emotions": {
+              "angry": 0,
+              "disgust": 0,
+              "fear": 10,
+              "happy": 0,
+              "neutral": 6,
+              "sad": 84,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 38.0,
+            "emotions": {
+              "angry": 0,
+              "disgust": 0,
+              "fear": 5,
+              "happy": 93,
+              "neutral": 0,
+              "sad": 2,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 75.333,
+            "emotions": {
+              "angry": 99,
+              "disgust": 0,
+              "fear": 1,
+              "happy": 0,
+              "neutral": 0,
+              "sad": 0,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 76.667,
+            "emotions": {
+              "angry": 0,
+              "disgust": 0,
+              "fear": 1,
+              "happy": 7,
+              "neutral": 0,
+              "sad": 0,
+              "surprise": 92
+            }
+          },
+          {
+            "t": 77.2,
+            "emotions": {
+              "angry": 0,
+              "disgust": 0,
+              "fear": 81,
+              "happy": 0,
+              "neutral": 17,
+              "sad": 2,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 77.333,
+            "emotions": {
+              "angry": 7,
+              "disgust": 0,
+              "fear": 25,
+              "happy": 0,
+              "neutral": 53,
+              "sad": 15,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 77.467,
+            "emotions": {
+              "angry": 1,
+              "disgust": 0,
+              "fear": 13,
+              "happy": 1,
+              "neutral": 65,
+              "sad": 20,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 80.0,
+            "emotions": {
+              "angry": 0,
+              "disgust": 0,
+              "fear": 20,
+              "happy": 0,
+              "neutral": 0,
+              "sad": 80,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 80.667,
+            "emotions": {
+              "angry": 63,
+              "disgust": 1,
+              "fear": 3,
+              "happy": 0,
+              "neutral": 3,
+              "sad": 30,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 89.467,
+            "emotions": {
+              "angry": 0,
+              "disgust": 0,
+              "fear": 34,
+              "happy": 64,
+              "neutral": 0,
+              "sad": 2,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 89.6,
+            "emotions": {
+              "angry": 0,
+              "disgust": 0,
+              "fear": 2,
+              "happy": 96,
+              "neutral": 0,
+              "sad": 2,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 89.733,
+            "emotions": {
+              "angry": 0,
+              "disgust": 0,
+              "fear": 27,
+              "happy": 62,
+              "neutral": 0,
+              "sad": 11,
+              "surprise": 0
+            }
+          }
+        ]
+      }
+    },
+    "Harshita": {
+      "emotion_timeline": {
+        "source": "p6_emotion_timeline",
+        "video": "video_sample_1.mov",
+        "duration_sec": 77.733,
+        "fps_analyzed": 8,
+        "dominant_emotion": "happy",
+        "emotion_time_pct": {
+          "angry": 0.0,
+          "disgust": 0.0,
+          "fear": 5.428571,
+          "happy": 84.428571,
+          "neutral": 8.428571,
+          "sad": 1.714286,
+          "surprise": 0.0
+        },
+        "suppression_score": 0,
+        "emotional_range_score": 91,
+        "micro_expressions": [],
+        "transitions": [],
+        "frame_series": [
+          {
+            "t": 39.333,
+            "emotions": {
+              "angry": 0,
+              "disgust": 0,
+              "fear": 0,
+              "happy": 100,
+              "neutral": 0,
+              "sad": 0,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 40.0,
+            "emotions": {
+              "angry": 0,
+              "disgust": 0,
+              "fear": 38,
+              "happy": 23,
+              "neutral": 28,
+              "sad": 11,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 40.133,
+            "emotions": {
+              "angry": 0,
+              "disgust": 0,
+              "fear": 0,
+              "happy": 73,
+              "neutral": 26,
+              "sad": 1,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 40.4,
+            "emotions": {
+              "angry": 0,
+              "disgust": 0,
+              "fear": 0,
+              "happy": 100,
+              "neutral": 0,
+              "sad": 0,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 40.533,
+            "emotions": {
+              "angry": 0,
+              "disgust": 0,
+              "fear": 0,
+              "happy": 100,
+              "neutral": 0,
+              "sad": 0,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 40.667,
+            "emotions": {
+              "angry": 0,
+              "disgust": 0,
+              "fear": 0,
+              "happy": 100,
+              "neutral": 0,
+              "sad": 0,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 77.733,
+            "emotions": {
+              "angry": 0,
+              "disgust": 0,
+              "fear": 0,
+              "happy": 95,
+              "neutral": 5,
+              "sad": 0,
+              "surprise": 0
+            }
+          }
+        ]
+      }
+    },
+    "Rohini": {
+      "emotion_timeline": {
+        "source": "p6_emotion_timeline",
+        "video": "video_sample_1.mov",
+        "duration_sec": 80.533,
+        "fps_analyzed": 8,
+        "dominant_emotion": "fear",
+        "emotion_time_pct": {
+          "angry": 3.176471,
+          "disgust": 0.058824,
+          "fear": 33.235294,
+          "happy": 18.705882,
+          "neutral": 30.764706,
+          "sad": 13.823529,
+          "surprise": 0.235294
+        },
+        "suppression_score": 33,
+        "emotional_range_score": 100,
+        "micro_expressions": [
+          {
+            "id": 1,
+            "timestamp_sec": 71.6,
+            "duration_sec": 0.134,
+            "emotion": "fear",
+            "peak_probability": 68.0,
+            "followed_by": "neutral",
+            "is_suppressed": true
+          },
+          {
+            "id": 2,
+            "timestamp_sec": 76.533,
+            "duration_sec": 0.134,
+            "emotion": "fear",
+            "peak_probability": 65.0,
+            "followed_by": "neutral",
+            "is_suppressed": true
+          },
+          {
+            "id": 3,
+            "timestamp_sec": 76.8,
+            "duration_sec": 0.133,
+            "emotion": "fear",
+            "peak_probability": 90.0,
+            "followed_by": "neutral",
+            "is_suppressed": true
+          },
+          {
+            "id": 4,
+            "timestamp_sec": 77.6,
+            "duration_sec": 0.134,
+            "emotion": "sad",
+            "peak_probability": 59.0,
+            "followed_by": "happy",
+            "is_suppressed": false
+          }
+        ],
+        "transitions": [],
+        "frame_series": [
+          {
+            "t": 71.2,
+            "emotions": {
+              "angry": 1,
+              "disgust": 0,
+              "fear": 51,
+              "happy": 0,
+              "neutral": 25,
+              "sad": 23,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 71.333,
+            "emotions": {
+              "angry": 0,
+              "disgust": 0,
+              "fear": 28,
+              "happy": 0,
+              "neutral": 66,
+              "sad": 6,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 71.467,
+            "emotions": {
+              "angry": 0,
+              "disgust": 0,
+              "fear": 10,
+              "happy": 0,
+              "neutral": 83,
+              "sad": 7,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 71.6,
+            "emotions": {
+              "angry": 2,
+              "disgust": 0,
+              "fear": 68,
+              "happy": 0,
+              "neutral": 22,
+              "sad": 8,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 71.733,
+            "emotions": {
+              "angry": 5,
+              "disgust": 0,
+              "fear": 29,
+              "happy": 0,
+              "neutral": 50,
+              "sad": 16,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 76.533,
+            "emotions": {
+              "angry": 2,
+              "disgust": 0,
+              "fear": 65,
+              "happy": 0,
+              "neutral": 14,
+              "sad": 19,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 76.667,
+            "emotions": {
+              "angry": 1,
+              "disgust": 0,
+              "fear": 12,
+              "happy": 0,
+              "neutral": 70,
+              "sad": 17,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 76.8,
+            "emotions": {
+              "angry": 1,
+              "disgust": 0,
+              "fear": 63,
+              "happy": 0,
+              "neutral": 20,
+              "sad": 16,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 76.933,
+            "emotions": {
+              "angry": 5,
+              "disgust": 1,
+              "fear": 90,
+              "happy": 0,
+              "neutral": 1,
+              "sad": 3,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 77.067,
+            "emotions": {
+              "angry": 0,
+              "disgust": 0,
+              "fear": 5,
+              "happy": 0,
+              "neutral": 94,
+              "sad": 1,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 77.6,
+            "emotions": {
+              "angry": 0,
+              "disgust": 0,
+              "fear": 34,
+              "happy": 5,
+              "neutral": 2,
+              "sad": 59,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 77.6,
+            "emotions": {
+              "angry": 0,
+              "disgust": 0,
+              "fear": 0,
+              "happy": 61,
+              "neutral": 39,
+              "sad": 0,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 77.867,
+            "emotions": {
+              "angry": 0,
+              "disgust": 0,
+              "fear": 0,
+              "happy": 93,
+              "neutral": 0,
+              "sad": 7,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 79.867,
+            "emotions": {
+              "angry": 0,
+              "disgust": 0,
+              "fear": 67,
+              "happy": 1,
+              "neutral": 0,
+              "sad": 32,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 80.133,
+            "emotions": {
+              "angry": 0,
+              "disgust": 0,
+              "fear": 3,
+              "happy": 96,
+              "neutral": 0,
+              "sad": 1,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 80.267,
+            "emotions": {
+              "angry": 0,
+              "disgust": 0,
+              "fear": 37,
+              "happy": 58,
+              "neutral": 0,
+              "sad": 3,
+              "surprise": 2
+            }
+          },
+          {
+            "t": 80.533,
+            "emotions": {
+              "angry": 37,
+              "disgust": 0,
+              "fear": 3,
+              "happy": 4,
+              "neutral": 37,
+              "sad": 17,
+              "surprise": 2
+            }
+          }
+        ]
+      }
+    },
+    "Mohini": {
+      "emotion_timeline": {
+        "source": "p6_emotion_timeline",
+        "video": "video_sample_1.mov",
+        "duration_sec": 74.667,
+        "fps_analyzed": 8,
+        "dominant_emotion": "fear",
+        "emotion_time_pct": {
+          "angry": 33.0,
+          "disgust": 0.5,
+          "fear": 61.0,
+          "happy": 5.5,
+          "neutral": 0.0,
+          "sad": 0.0,
+          "surprise": 0.0
+        },
+        "suppression_score": 0,
+        "emotional_range_score": 83,
+        "micro_expressions": [],
+        "transitions": [],
+        "frame_series": [
+          {
+            "t": 73.867,
+            "emotions": {
+              "angry": 65,
+              "disgust": 1,
+              "fear": 34,
+              "happy": 0,
+              "neutral": 0,
+              "sad": 0,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 74.667,
+            "emotions": {
+              "angry": 1,
+              "disgust": 0,
+              "fear": 88,
+              "happy": 11,
+              "neutral": 0,
+              "sad": 0,
+              "surprise": 0
+            }
+          }
+        ]
+      }
+    },
+    "Ranjhana": {
+      "emotion_timeline": {
+        "source": "p6_emotion_timeline",
+        "video": "video_sample_1.mov",
+        "duration_sec": 80.4,
+        "fps_analyzed": 8,
+        "dominant_emotion": "angry",
+        "emotion_time_pct": {
+          "angry": 46.2,
+          "disgust": 0.2,
+          "fear": 5.6,
+          "happy": 20.0,
+          "neutral": 10.4,
+          "sad": 17.6,
+          "surprise": 0.0
+        },
+        "suppression_score": 0,
+        "emotional_range_score": 100,
+        "micro_expressions": [],
+        "transitions": [],
+        "frame_series": [
+          {
+            "t": 74.267,
+            "emotions": {
+              "angry": 98,
+              "disgust": 1,
+              "fear": 1,
+              "happy": 0,
+              "neutral": 0,
+              "sad": 0,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 74.4,
+            "emotions": {
+              "angry": 99,
+              "disgust": 0,
+              "fear": 0,
+              "happy": 0,
+              "neutral": 1,
+              "sad": 0,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 75.067,
+            "emotions": {
+              "angry": 11,
+              "disgust": 0,
+              "fear": 26,
+              "happy": 0,
+              "neutral": 0,
+              "sad": 63,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 77.867,
+            "emotions": {
+              "angry": 0,
+              "disgust": 0,
+              "fear": 0,
+              "happy": 100,
+              "neutral": 0,
+              "sad": 0,
+              "surprise": 0
+            }
+          },
+          {
+            "t": 80.4,
+            "emotions": {
+              "angry": 23,
+              "disgust": 0,
+              "fear": 1,
+              "happy": 0,
+              "neutral": 51,
+              "sad": 25,
+              "surprise": 0
+            }
+          }
+        ]
+      }
+    }
+  }
+}
