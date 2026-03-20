@@ -91,12 +91,3 @@ opencv-python==4.9.0   deepface==0.0.93   mediapipe==0.10.14   numpy==1.26.4
 | 3 | `emotion_timeline_output.json` | Output matching schema |
 | 4 | `demo.mp4` | Screen recording under 2 min |
 
-Push to your branch only. Do not touch main.
-
----
-
-## Bonus
-
-Duchenne smile detector: a genuine smile (eye corners crinkling) vs. a social smile (mouth only). Use MediaPipe Face Mesh landmark distances around the outer eye corners to classify. Mark genuine smiles differently on the timeline chart.
-
-*Sentio Mind · 2026*
