@@ -1,0 +1,17 @@
+# Micro-Expression & Emotion Timeline Analyzer
+# Complete requirements for Lightning AI / GPU environment
+
+# Core dependencies
+opencv-python
+numpy<2
+Pillow
+
+# Face detection and emotion analysis
+deepface
+face_recognition
+
+# TensorFlow compatibility
+tf-keras
+
+# Progress bar (optional but recommended)
+tqdm
