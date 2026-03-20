@@ -1,8 +1,4 @@
 # Micro-Expression & Emotion Transition Timeline
-**Sentio Mind · POC Assignment · Project 6**
-
-GitHub: https://github.com/Sentiodirector/sentio-poc-emotion-timeline.git
-Branch: FirstName_LastName_RollNumber
 
 ---
 
