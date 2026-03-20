@@ -1,4 +1,5 @@
 # Micro-Expression & Emotion Transition Timeline
+
 **Sentio Mind · POC Assignment · Project 6**
 
 GitHub: https://github.com/Sentiodirector/sentio-poc-emotion-timeline.git
@@ -34,6 +35,7 @@ Run `python solution.py` → it must produce:
 ### Micro-Expression Definition (implement exactly this)
 
 A micro-expression is a frame sequence where:
+
 1. A non-neutral emotion appears suddenly with probability ≥ 0.40
 2. It lasts less than 0.5 seconds (fewer than `ANALYSIS_FPS × 0.5` frames)
 3. It is directly preceded AND followed by neutral (probability ≥ 0.50)
@@ -42,6 +44,7 @@ A micro-expression is a frame sequence where:
 
 **Suppression Score (0–100)**
 How often the person flashes a micro-expression and immediately returns to neutral — a stress indicator.
+
 ```
 suppression_score = (micro_expression_count / total_expression_events) * 100
 where total_expression_events = frames where any non-neutral emotion > 0.35
@@ -49,6 +52,7 @@ where total_expression_events = frames where any non-neutral emotion > 0.35
 
 **Emotional Range Score (0–100)**
 How varied/expressive the person is.
+
 ```
 range_score = min(100, (distinct_emotions_with_prob_over_30 / 7) * 100 + std(all_probs_over_time) * 2)
 ```
@@ -62,6 +66,7 @@ range_score = min(100, (distinct_emotions_with_prob_over_30 / 7) * 100 + std(all
 ### Emotion Model
 
 Try DeepFace first. If not installed, fall back to OpenCV DNN with the FER+ ONNX model:
+
 ```bash
 # Download once
 wget https://github.com/opencv/opencv_zoo/raw/main/models/emotion_ferplus/emotion_ferplus_2022jan.onnx -O models/emotion_ferplus.onnx
@@ -88,12 +93,12 @@ opencv-python==4.9.0   deepface==0.0.93   mediapipe==0.10.14   numpy==1.26.4
 
 ## Submit
 
-| # | File | What |
-|---|------|------|
-| 1 | `solution.py` | Working script |
-| 2 | `emotion_timeline.html` | River chart + stats |
-| 3 | `emotion_timeline_output.json` | Output matching schema |
-| 4 | `demo.mp4` | Screen recording under 2 min |
+| #   | File                           | What                         |
+| --- | ------------------------------ | ---------------------------- |
+| 1   | `solution.py`                  | Working script               |
+| 2   | `emotion_timeline.html`        | River chart + stats          |
+| 3   | `emotion_timeline_output.json` | Output matching schema       |
+| 4   | `demo.mp4`                     | Screen recording under 2 min |
 
 Push to your branch only. Do not touch main.
 
@@ -103,4 +108,4 @@ Push to your branch only. Do not touch main.
 
 Duchenne smile detector: a genuine smile (eye corners crinkling) vs. a social smile (mouth only). Use MediaPipe Face Mesh landmark distances around the outer eye corners to classify. Mark genuine smiles differently on the timeline chart.
 
-*Sentio Mind · 2026*
+_Sentio Mind · 2026_
