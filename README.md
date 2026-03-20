@@ -1,5 +1,8 @@
 # Micro-Expression & Emotion Transition Timeline
 
+### Video explanation 
+- https://drive.google.com/drive/folders/1SgzKTKD-g5d752Tlf3M3zsHku1bX8fZ8?usp=sharing
+
 Detect sub-second emotion flashes and track emotion transitions over video sessions.
 
 ## System Architecture
