@@ -2,7 +2,7 @@
 **Sentio Mind · POC Assignment · Project 6**
 
 GitHub: https://github.com/Sentiodirector/sentio-poc-emotion-timeline.git
-Branch: FirstName_LastName_RollNumber
+Branch: Saurabh_Kumar_22IT3043
 
 ---
 
@@ -83,6 +83,28 @@ wget https://github.com/opencv/opencv_zoo/raw/main/models/emotion_ferplus/emotio
 ```
 opencv-python==4.9.0   deepface==0.0.93   mediapipe==0.10.14   numpy==1.26.4
 ```
+
+---
+
+## Implementation Notes (This Submission)
+
+- Script entry point: `solution.py`
+- Analysis FPS: `8`
+- Supports DeepFace first, then OpenCV FER+ ONNX fallback (`models/emotion_ferplus.onnx`)
+- Outputs generated:
+	- `emotion_timeline_output.json`
+	- `emotion_timeline.html`
+
+### How To Run
+
+```bash
+python solution.py
+```
+
+### Expected Artifacts
+
+- `emotion_timeline_output.json` with timeline frames, transitions, micro-expressions, and metrics
+- `emotion_timeline.html` with visual timeline, summary stats, and transition details
 
 ---
 
