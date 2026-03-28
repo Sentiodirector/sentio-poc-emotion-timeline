@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion Timeline Visualization</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            max-width: 1400px;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .metadata {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .meta-item {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .meta-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        
+        .meta-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: #667eea;
+            margin-top: 5px;
+        }
+        
+        .chart-container {
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        canvas {
+            display: block;
+            width: 100%;
+            border-radius: 4px;
+            max-height: 500px;
+        }
+        
+        .tooltip {
+            position: absolute;
+            background: #333;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 12px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            z-index: 1000;
+            white-space: nowrap;
+        }
+        
+        .tooltip.visible {
+            opacity: 1;
+        }
+        
+        .legend {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .legend-color {
+            width: 30px;
+            height: 15px;
+            border-radius: 3px;
+        }
+        
+        .legend-label {
+            font-size: 14px;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+        
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+        }
+        
+        .emotion-breakdown {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .emotion-breakdown h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .emotion-bar {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .emotion-name {
+            width: 100px;
+            font-weight: 500;
+            color: #666;
+        }
+        
+        .emotion-fill {
+            flex: 1;
+            background: #e0e0e0;
+            height: 20px;
+            border-radius: 3px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .emotion-progress {
+            height: 100%;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 8px;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .error {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            color: #856404;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #667eea;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Emotion Timeline Analysis</h1>
+        
+        <div id="metadata" class="metadata"></div>
+        
+        <div class="chart-container">
+            <canvas id="emotionChart"></canvas>
+            <div id="tooltip" class="tooltip"></div>
+        </div>
+        
+        <div id="legend" class="legend"></div>
+        
+        <div id="stats" class="stats"></div>
+        
+        <div id="emotionBreakdown" class="emotion-breakdown"></div>
+        
+        <div id="error" class="error" style="display: none;"></div>
+    </div>
+
+    <script>
+        // Color scheme for emotions
+        const emotionColors = {
+            happy: '#FFD700',      // Gold
+            sad: '#4169E1',        // Royal Blue
+            angry: '#DC143C',      // Crimson
+            fear: '#9932CC',       // Dark Orchid
+            surprise: '#FF6347',   // Tomato
+            neutral: '#A9A9A9',    // Dark Gray
+            disgust: '#228B22'     // Forest Green
+        };
+
+        const emotionOrder = ['happy', 'sad', 'angry', 'fear', 'surprise', 'neutral', 'disgust'];
+
+        let chartData = null;
+        let canvas = null;
+        let ctx = null;
+
+        // Initialize application
+        async function init() {
+            try {
+                // Load JSON data
+                chartData = await loadData();
+                canvas = document.getElementById('emotionChart');
+                ctx = canvas.getContext('2d');
+
+                // Render UI
+                renderMetadata();
+                renderLegend();
+                renderStats();
+                renderEmotionBreakdown();
+                resizeCanvas();
+                drawChart();
+
+                // Handle resize
+                window.addEventListener('resize', () => {
+                    resizeCanvas();
+                    drawChart();
+                });
+
+                // Handle mouse move for tooltips
+                canvas.addEventListener('mousemove', handleMouseMove);
+                canvas.addEventListener('mouseleave', hideTooltip);
+            } catch (error) {
+                showError('Failed to load or render chart: ' + error.message);
+            }
+        }
+
+        // Load emotion timeline JSON
+        async function loadData() {
+            // Try to load from file first
+            try {
+                const response = await fetch('emotion_timeline_output.json');
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                return await response.json();
+            } catch (e1) {
+                // Fallback: try embedded data or show error
+                throw new Error('Could not load emotion_timeline_output.json: ' + e1.message);
+            }
+        }
+
+        // Resize canvas to match container
+        function resizeCanvas() {
+            const rect = canvas.parentElement.getBoundingClientRect();
+            const dpr = window.devicePixelRatio || 1;
+            
+            canvas.width = rect.width * dpr;
+            canvas.height = 400 * dpr;
+            
+            ctx.scale(dpr, dpr);
+            canvas.style.width = rect.width + 'px';
+            canvas.style.height = '400px';
+        }
+
+        // Draw stacked area chart
+        function drawChart() {
+            if (!chartData || !chartData.timeline) return;
+
+            const timeline = chartData.timeline;
+            const microExpressions = chartData.micro_expressions || [];
+
+            const padding = 60;
+            const width = canvas.width / (window.devicePixelRatio || 1) - padding * 2;
+            const height = 400 - padding * 2;
+
+            // Clear canvas
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width / (window.devicePixelRatio || 1), 400);
+
+            // Draw axes
+            drawAxes(padding, width, height);
+
+            // Draw stacked areas
+            const points = drawStackedAreas(timeline, padding, width, height);
+
+            // Draw micro-expression markers
+            drawMicroExpressionMarkers(microExpressions, timeline, padding, width, height);
+
+            // Store for tooltip interaction
+            canvas.chartPoints = points;
+            canvas.timeline = timeline;
+            canvas.padding = padding;
+            canvas.width2 = width;
+            canvas.height2 = height;
+        }
+
+        // Draw chart axes and labels
+        function drawAxes(padding, width, height) {
+            // Y-axis
+            ctx.strokeStyle = '#ddd';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(padding, padding);
+            ctx.lineTo(padding, padding + height);
+            ctx.stroke();
+
+            // X-axis
+            ctx.beginPath();
+            ctx.moveTo(padding, padding + height);
+            ctx.lineTo(padding + width, padding + height);
+            ctx.stroke();
+
+            // X-axis labels (time in seconds)
+            ctx.fillStyle = '#666';
+            ctx.font = '12px sans-serif';
+            ctx.textAlign = 'center';
+
+            const duration = chartData.duration_sec;
+            const steps = 5;
+            for (let i = 0; i <= steps; i++) {
+                const t = (i / steps) * duration;
+                const x = padding + (i / steps) * width;
+                ctx.fillText(t.toFixed(1) + 's', x, padding + height + 20);
+
+                // Grid line
+                ctx.strokeStyle = '#f0f0f0';
+                ctx.lineWidth = 0.5;
+                ctx.beginPath();
+                ctx.moveTo(x, padding);
+                ctx.lineTo(x, padding + height);
+                ctx.stroke();
+            }
+
+            // Y-axis label
+            ctx.fillStyle = '#666';
+            ctx.font = '12px sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText('Confidence (%)', 10, 25);
+        }
+
+        // Draw stacked area chart
+        function drawStackedAreas(timeline, padding, width, height) {
+            const points = {};
+
+            emotionOrder.forEach(emotion => {
+                points[emotion] = [];
+            });
+
+            // Normalize duration
+            const duration = chartData.duration_sec;
+
+            // Build stacked data and draw areas
+            emotionOrder.forEach((emotion, emotionIdx) => {
+                const color = emotionColors[emotion];
+                ctx.fillStyle = color;
+                ctx.globalAlpha = 0.7;
+
+                ctx.beginPath();
+
+                let isFirst = true;
+                let previousY = padding + height; // Start from bottom
+
+                timeline.forEach((frame, frameIdx) => {
+                    const x = padding + (frame.time / duration) * width;
+                    const emotionValue = frame.emotions[emotion] || 0;
+                    
+                    // Calculate cumulative value for stacking
+                    let stackedValue = emotionValue;
+                    for (let i = 0; i < emotionIdx; i++) {
+                        stackedValue += (frame.emotions[emotionOrder[i]] || 0);
+                    }
+
+                    const y = padding + height - (stackedValue / 100) * height;
+
+                    if (isFirst) {
+                        ctx.moveTo(x, previousY);
+                        isFirst = false;
+                    }
+                    ctx.lineTo(x, y);
+
+                    points[emotion].push({ x, y, value: emotionValue, time: frame.time });
+                });
+
+                // Draw back down to baseline
+                ctx.lineTo(padding + width, previousY);
+                ctx.lineTo(padding, previousY);
+                ctx.closePath();
+                ctx.fill();
+            });
+
+            ctx.globalAlpha = 1;
+            return points;
+        }
+
+        // Draw vertical dashed lines for micro-expressions
+        function drawMicroExpressionMarkers(microExpressions, timeline, padding, width, height) {
+            if (!microExpressions || microExpressions.length === 0) return;
+
+            const duration = chartData.duration_sec;
+
+            microExpressions.forEach(me => {
+                const x = padding + (me.timestamp_sec / duration) * width;
+
+                // Draw vertical dashed line
+                ctx.strokeStyle = '#FF0000';
+                ctx.lineWidth = 2;
+                ctx.setLineDash([5, 5]);
+                ctx.beginPath();
+                ctx.moveTo(x, padding);
+                ctx.lineTo(x, padding + height);
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                // Draw marker circle at top
+                ctx.fillStyle = '#FF0000';
+                ctx.beginPath();
+                ctx.arc(x, padding - 10, 5, 0, Math.PI * 2);
+                ctx.fill();
+            });
+        }
+
+        // Handle mouse move for tooltips
+        function handleMouseMove(e) {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const dpr = window.devicePixelRatio || 1;
+
+            const padding = canvas.padding;
+            const width = canvas.width2;
+            const height = canvas.height2;
+            const timeline = canvas.timeline;
+            const duration = chartData.duration_sec;
+
+            // Find nearest timeline point
+            if (x > padding && x < padding + width && y > padding && y < padding + height) {
+                const normalizedX = (x - padding) / width;
+                const time = normalizedX * duration;
+
+                // Find closest frame
+                let closestFrame = timeline[0];
+                let minDist = Math.abs(closestFrame.time - time);
+
+                for (let i = 1; i < timeline.length; i++) {
+                    const dist = Math.abs(timeline[i].time - time);
+                    if (dist < minDist) {
+                        minDist = dist;
+                        closestFrame = timeline[i];
+                    }
+                }
+
+                // Show tooltip
+                const tooltip = document.getElementById('tooltip');
+                let tooltipText = `<strong>Time: ${closestFrame.time.toFixed(2)}s</strong><br>`;
+                emotionOrder.forEach(emotion => {
+                    const value = closestFrame.emotions[emotion];
+                    tooltipText += `${emotion}: ${value.toFixed(1)}%<br>`;
+                });
+
+                tooltip.innerHTML = tooltipText;
+                tooltip.classList.add('visible');
+                tooltip.style.left = (x + 10) + 'px';
+                tooltip.style.top = (y - 50) + 'px';
+            } else {
+                hideTooltip();
+            }
+        }
+
+        function hideTooltip() {
+            document.getElementById('tooltip').classList.remove('visible');
+        }
+
+        // Render metadata section
+        function renderMetadata() {
+            const meta = document.getElementById('metadata');
+            meta.innerHTML = `
+                <div class="meta-item">
+                    <div class="meta-label">Video Duration</div>
+                    <div class="meta-value">${chartData.duration_sec.toFixed(2)}s</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Analysis FPS</div>
+                    <div class="meta-value">${chartData.fps_analyzed}</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Dominant Emotion</div>
+                    <div class="meta-value">${chartData.dominant_emotion}</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Total Frames</div>
+                    <div class="meta-value">${chartData.timeline.length}</div>
+                </div>
+            `;
+        }
+
+        // Render legend
+        function renderLegend() {
+            const legend = document.getElementById('legend');
+            legend.innerHTML = emotionOrder.map(emotion => `
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: ${emotionColors[emotion]};"></div>
+                    <div class="legend-label">${emotion.charAt(0).toUpperCase() + emotion.slice(1)}</div>
+                </div>
+            `).join('');
+        }
+
+        // Render statistics
+        function renderStats() {
+            const stats = document.getElementById('stats');
+            stats.innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-label">Suppression Score</div>
+                    <div class="stat-value">${chartData.suppression_score}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Emotional Range Score</div>
+                    <div class="stat-value">${chartData.emotional_range_score}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Micro-Expressions Detected</div>
+                    <div class="stat-value">${chartData.micro_expressions ? chartData.micro_expressions.length : 0}</div>
+                </div>
+            `;
+        }
+
+        // Render emotion breakdown
+        function renderEmotionBreakdown() {
+            const breakdown = document.getElementById('emotionBreakdown');
+            const emotionTimePct = chartData.emotion_time_pct;
+
+            breakdown.innerHTML = '<h3>Emotion Distribution Over Time</h3>' + emotionOrder.map(emotion => {
+                const pct = emotionTimePct[emotion] || 0;
+                return `
+                    <div class="emotion-bar">
+                        <div class="emotion-name">${emotion.charAt(0).toUpperCase() + emotion.slice(1)}</div>
+                        <div class="emotion-fill">
+                            <div class="emotion-progress" style="width: ${pct}%; background-color: ${emotionColors[emotion]};">
+                                ${pct > 5 ? pct.toFixed(1) + '%' : ''}
+                            </div>
+                        </div>
+                        <div style="width: 40px; text-align: right; font-weight: bold; color: #667eea;">${pct.toFixed(1)}%</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Show error message
+        function showError(msg) {
+            document.getElementById('error').textContent = msg;
+            document.getElementById('error').style.display = 'block';
+        }
+
+        // Start when DOM is ready
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
+<!-- add hover tooltip to display emotion values and time -->
