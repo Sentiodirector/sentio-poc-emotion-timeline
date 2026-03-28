@@ -3,9 +3,9 @@
 ## Overview
 This project implements an advanced **3-Layer Validation System** for detecting micro-expressions in video content. Unlike basic emotion detection that only uses a single source, this solution validates micro-expressions through multiple independent methods to reduce false positives and provide high-confidence results.
 
-## 🎯 Key Features
+## Key Features
 
-### 📊 3-Layer Validation Architecture
+### 3-Layer Validation Architecture
 | Layer | Technology | Purpose |
 |-------|------------|---------|
 | Layer 1 | DeepFace + Sliding Window | Detect emotion changes with temporal smoothing |
@@ -587,34 +587,15 @@ python solution.py --photos photos/
 python solution.py --video video_sample.mp4 --fps 10
 ```
 
-## 📸 Output Files & Reports
+## Output Files & Reports
 
 | File | Description |
 |------|-------------|
 | `emotion_timeline_output.json` | Complete analysis data with validation layers |
 | `emotion_timeline.html` | Interactive HTML report with charts |
 
-### 🎨 Interactive HTML Report
 
-![Demo Screenshot](images/demo_screenshot.png)
-
-Our system generates a beautiful, interactive HTML report featuring:
-
-- **📊 Real-time Emotion Timeline**: Stacked area chart showing emotion evolution over time
-- **🔥 Confidence Heatmap**: Visual representation of detection confidence across frames
-- **📈 Key Metrics Dashboard**: Suppression score, emotional range, and micro-expression counts
-- **🎯 Detailed Micro-Expression Cards**: Clickable cards showing each detected micro-expression with validation layer details
-- **📱 Responsive Design**: Works seamlessly on desktop and mobile devices
-
-#### 🌟 Report Features:
-- **Interactive Charts**: Zoom, pan, and hover for detailed information
-- **Validation Layer Badges**: See which layers confirmed each detection
-- **Temporal Navigation**: Jump to specific timestamps in the video
-- **Export Capabilities**: Download data and charts for further analysis
-
-**[▶️ View Live Demo](emotion_timeline.html)** - Open the HTML report to see the interactive interface in action!
-
-## 📋 JSON Schema
+## JSON Schema
 
 ```json
 {
@@ -652,9 +633,9 @@ Our system generates a beautiful, interactive HTML report featuring:
 }
 ```
 
-## 🎯 Results & Performance
+## Results & Performance
 
-### 📊 Video Analysis Results
+### Video Analysis Results
 | Metric | Value | Interpretation |
 |--------|-------|----------------|
 | **Frames Analyzed** | 652 | Comprehensive frame sampling |
@@ -663,30 +644,30 @@ Our system generates a beautiful, interactive HTML report featuring:
 | **Suppression Score** | 6.52% | Low emotion concealment |
 | **Emotional Range Score** | 85.71% | High emotional diversity |
 
-### 🎭 Detected Emotions Distribution
+### Detected Emotions Distribution
 
-- **😊 Happy**: Multiple occurrences - Positive engagement
-- **😢 Sad**: Multiple occurrences - Empathy responses  
-- **😨 Fear**: 2 occurrences - Stress indicators
-- **😠 Angry, 🤢 Disgust, 😮 Surprise, 😐 Neutral**: Tracked throughout baseline
+- **Happy**: Multiple occurrences - Positive engagement
+- **Sad**: Multiple occurrences - Empathy responses  
+- **Fear**: 2 occurrences - Stress indicators
+- **Angry, Disgust, Surprise, Neutral**: Tracked throughout baseline
 
-### 🔬 Technical Details
+### Technical Details
 
 #### What is a Micro-Expression?
 A micro-expression is a brief, involuntary facial expression that occurs when a person tries to suppress or conceal their true emotions. They typically last **less than 500ms** (0.5 seconds).
 
 #### Why 3-Layer Validation?
-1. **🎯 Reduces False Positives**: Single-source detection often flags noise as emotions
-2. **🔄 Multi-Modal Confirmation**: Movement + Emotion + Landmarks must all agree
-3. **📈 Confidence Scoring**: Quantifiable trust level for each detection
+1. **Reduces False Positives**: Single-source detection often flags noise as emotions
+2. **Multi-Modal Confirmation**: Movement + Emotion + Landmarks must all agree
+3. **Confidence Scoring**: Quantifiable trust level for each detection
 
-#### 🔍 Optical Flow Validation
+#### Optical Flow Validation
 Uses Farneback optical flow algorithm to detect actual pixel movement in facial regions. This confirms that a detected emotion change corresponds to real facial movement.
 
-#### 📍 Landmark Displacement
+#### Landmark Displacement
 Tracks 29 key facial points (eyebrows, lips, eyes) to measure how much facial features moved between frames.
 
-## 🛠️ Dependencies
+## Dependencies
 
 - **Python 3.9+** - Core runtime environment
 - **DeepFace** - Emotion recognition neural network
@@ -697,7 +678,7 @@ Tracks 29 key facial points (eyebrows, lips, eyes) to measure how much facial fe
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Quick Start
 ```bash
@@ -714,7 +695,3 @@ python solution.py --video video_sample.mp4
 # View results
 open emotion_timeline.html
 ```
-
-### 🎬 Demo Video Script
-Check out our [3-minute demo script](demo_script.md) for presenting Sentio Mind to audiences.
-
