@@ -236,9 +236,21 @@ def compute_frame_emotions(frames, analyzer):
     frame_series = []
     last_emotion = None
 
+    face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+
     for idx, (t, frame) in enumerate(frames):
         try:
-            result = analyzer(frame)
+            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+
+            if len(faces) > 0:
+                (x, y, w, h) = faces[0]
+                face = frame[y:y+h, x:x+w]
+            else:
+                face = frame
+
+            result = analyzer(face)
+
             if result is None or "emotion" not in result:
                 raise ValueError("No emotion output from analyzer")
 
@@ -246,7 +258,6 @@ def compute_frame_emotions(frames, analyzer):
             if not isinstance(emotions, dict):
                 raise ValueError("emotion output type invalid")
 
-            # Normalize to 0-100 and ensure all keys exist
             em = {k: float(emotions.get(k, 0.0)) for k in EMOTIONS}
             s = sum(em.values())
             if s > 0:
@@ -257,8 +268,8 @@ def compute_frame_emotions(frames, analyzer):
 
             dominant = max(em.items(), key=lambda x: x[1])[0]
             last_emotion = em
+
         except Exception as ex:
-            # interpolation from last known frame
             if last_emotion is not None:
                 em = last_emotion.copy()
                 dominant = max(em.items(), key=lambda x: x[1])[0]
@@ -351,34 +362,26 @@ def detect_transitions(frame_series):
 def compute_scores(frame_series, micro_expressions):
     total_frames = len(frame_series)
     dominant_counts = {k: 0 for k in EMOTIONS}
-    expression_events = 0
-    all_probs = []
-    distinct_emotions = set()
+
+    non_neutral_events = 0
+    unique_emotions = set()
 
     for f in frame_series:
         dom = f["dominant"]
         dominant_counts[dom] += 1
-        non_neutral_probs = [f["emotions"][e] for e in EMOTIONS if e != NEUTRAL]
-        max_non_neutral = max(non_neutral_probs)
-        if max_non_neutral > 35.0:
-            expression_events += 1
 
-        for e in EMOTIONS:
-            p = f["emotions"][e] / 100.0
-            all_probs.append(p)
-            if p > 0.30:
-                distinct_emotions.add(e)
+        if dom != NEUTRAL:
+            non_neutral_events += 1
+            unique_emotions.add(dom)
 
     suppression_score = 0
-    if expression_events > 0:
-        suppression_score = int(round(len(micro_expressions) / expression_events * 100))
+    if non_neutral_events > 0:
+        suppression_score = (len(micro_expressions) / non_neutral_events) * 100
 
-    std_prob = float(np.std(all_probs)) if all_probs else 0.0
-    range_score = min(100.0, (len(distinct_emotions) / 7.0) * 100.0 + std_prob * 2.0)
+    total_possible = max(1, len(EMOTIONS) - 1)
+    emotional_range_score = (len(unique_emotions) / total_possible) * 100
 
-    duration_frames = total_frames
-    if duration_frames == 0:
-        duration_frames = 1
+    duration_frames = total_frames if total_frames > 0 else 1
 
     emotion_time_pct = {k: 0.0 for k in EMOTIONS}
     for k, v in dominant_counts.items():
@@ -390,21 +393,12 @@ def compute_scores(frame_series, micro_expressions):
         "dominant_emotion": dominant_emotion,
         "emotion_time_pct": emotion_time_pct,
         "suppression_score": int(round(suppression_score)),
-        "emotional_range_score": int(round(range_score)),
-        "total_expression_events": expression_events,
+        "emotional_range_score": int(round(emotional_range_score)),
     }
 
 
-def build_output(video_path, duration, frame_series, micro_expressions, transitions, score_bundle):
+def build_output(frame_series, micro_expressions, score_bundle):
     return {
-        "source": "p6_emotion_timeline",
-        "video": os.path.basename(video_path),
-        "duration_sec": float(round(duration, 3)),
-        "fps_analyzed": ANALYSIS_FPS,
-        "dominant_emotion": score_bundle["dominant_emotion"],
-        "emotion_time_pct": score_bundle["emotion_time_pct"],
-        "suppression_score": score_bundle["suppression_score"],
-        "emotional_range_score": score_bundle["emotional_range_score"],
         "timeline": [
             {
                 "time": f["t"],
@@ -413,14 +407,17 @@ def build_output(video_path, duration, frame_series, micro_expressions, transiti
             }
             for f in frame_series
         ],
-        "micro_expressions": micro_expressions,
-        "transitions": transitions,
-        "frame_series": [
-            {"t": f["t"], "emotions": {k: float(round(f["emotions"][k], 2)) for k in EMOTIONS}}
-            for f in frame_series
+        "micro_expressions": [
+            {
+                "time": m["timestamp_sec"],
+                "emotion": m["emotion"],
+                "confidence": float(round(m["peak_probability"] * 100.0, 2)),
+            }
+            for m in micro_expressions
         ],
+        "suppression_score": score_bundle["suppression_score"],
+        "emotional_range_score": score_bundle["emotional_range_score"]
     }
-
 
 def save_output(out):
     dest = os.path.join(os.path.dirname(__file__), "emotion_timeline_output.json")
@@ -441,7 +438,7 @@ def main():
         transitions = detect_transitions(frame_series)
         score_bundle = compute_scores(frame_series, micro_expressions)
 
-        output = build_output(video_path, duration, frame_series, micro_expressions, transitions, score_bundle)
+        output = build_output(frame_series, micro_expressions, score_bundle)
         save_output(output)
 
         print("Micro-expression count:", len(micro_expressions))
