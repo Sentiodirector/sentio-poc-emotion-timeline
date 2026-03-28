@@ -18,8 +18,8 @@ Our innovative three-layer validation system processes video frames through para
 
 ### Emotion_timeline
 
-![Emotion_timeline1](Emotional_timeline1.png)
-![Emotion_timeline2](Emotional_timeline2.png)
+![Emotion_timeline1](Emotional_Timeline1.png)
+![Emotion_timeline2](Emotional_Timeline2.png)
 
 
 ### Data Flow
