@@ -1,0 +1,34 @@
+
+{
+  "emotion_timeline": {
+    "micro_expressions": [
+      {
+        "time": 13.50,
+        "emotion": "happy",
+        "duration": 0.10
+      },
+      {
+        "time": 19.82,
+        "emotion": "happy",
+        "duration": 0.20
+      },
+      {
+        "time": 33.67,
+        "emotion": "sad",
+        "duration": 0.20
+      },
+      {
+        "time": 33.92,
+        "emotion": "sad",
+        "duration": 0.20
+      },
+      {
+        "time": 34.35,
+        "emotion": "sad",
+        "duration": 0.10
+      }
+    ],
+    "suppression_score": 3.49,
+    "emotional_range": 71.43
+  }
+}
